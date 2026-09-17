@@ -1,0 +1,12 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
+^README\.Rmd$
+^LICENSE\.md$
+^cran-comments\.md$
+^doc$
+^Meta$
+^CGLBM-reproduction$
