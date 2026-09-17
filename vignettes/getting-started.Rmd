@@ -1,0 +1,61 @@
+---
+title: "Getting started with CGLBM"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with CGLBM}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+`CGLBM` co-clusters matrix rows and columns while using exact values and
+censoring intervals in one reported-data likelihood.
+
+```{r}
+library(CGLBM)
+
+z0 <- rep(1:2, each = 4)
+w0 <- rep(1:2, each = 4)
+mu0 <- matrix(c(-2, 0.5, 0.5, 2.5), 2, 2)
+y <- matrix(0, 8, 8)
+for (i in seq_len(8)) for (j in seq_len(8)) {
+  y[i, j] <- mu0[z0[i], w0[j]] + 0.02 * (i - j)
+}
+
+reported <- apply_detection_limits(
+  y,
+  lower_limit = -2,
+  upper_limit = 2.5
+)
+reported
+```
+
+Fit one model with a fixed start. The `S` argument controls the block variance
+structure and `P` controls whether row and column class proportions are free or
+equal.
+
+```{r}
+fit <- censored_lbm(
+  reported,
+  g = 2,
+  m = 2,
+  algorithm = "HH",
+  S = "Skl",
+  P = "free",
+  n_starts = 1,
+  starts = list(list(z = z0, w = w0)),
+  max_start_attempts = 1,
+  max_iter = 50,
+  seed = 1
+)
+fit
+predict(fit, type = "labels")
+summary(fit)
+```
+
+The summary reports fitted block means and variances, plug-in standard errors,
+effective observed block weights, report counts, and information-equivalent
+sample sizes.

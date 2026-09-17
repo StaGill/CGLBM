@@ -1,0 +1,42 @@
+---
+title: "Reporting design and block-mean information"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Reporting design and block-mean information}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+Fisher-information summaries use the fixed reporting rule, not only the
+realized report status. `apply_detection_limits()` retains the complete lower
+and upper limits, including at cells that happened to be reported exactly.
+
+```{r}
+library(CGLBM)
+
+y <- matrix(c(-2, -0.5, 0.5, 2, -1.5, 0, 1, 2.5), nrow = 4)
+reported <- apply_detection_limits(y, lower_limit = -1, upper_limit = 2)
+reported$metadata$reporting_design
+
+fit <- censored_lbm(
+  reported,
+  g = 1,
+  m = 1,
+  algorithm = "SS",
+  n_starts = 1,
+  max_start_attempts = 1,
+  max_iter = 50,
+  seed = 3
+)
+summary(fit)
+```
+
+For externally assembled reports, provide the complete rule through
+`metadata$reporting_design`. Missing or inconsistent design metadata does not
+invalidate the fit, but information-derived fields are returned as `NA` with a
+reason. A finite interval-valued report is supported by the likelihood, while
+its Fisher-information contribution is not implemented in the first release.
