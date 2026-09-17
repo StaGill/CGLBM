@@ -1,0 +1,52 @@
+Package: CGLBM
+Title: Censored Gaussian Latent Block Models for Co-Clustering
+Version: 0.1.0
+Authors@R:
+    c(
+      person("Kejun", "Fang",
+             email = "kejun.fang@mail.mcgill.ca",
+             role = c("aut", "cre")),
+      person("Qihuang", "Zhang",
+             email = "qihuang.zhang@mcgill.ca",
+             role = "aut")
+    )
+Description: Fits Gaussian latent block models to matrices containing exact,
+    left-censored, right-censored, interval-censored, and missing reports.
+    The package jointly estimates row and column memberships with block means
+    and variances using the reported-data likelihood, supports hard and soft
+    membership updates, selects row and column class numbers using a
+    Bayesian-information-criterion approximation to the integrated
+    classification likelihood, and reports block-mean standard errors from
+    Fisher information under fixed reporting rules. Completion-based
+    comparators and censoring-aware column centering are also provided.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: false
+Roxygen: list(markdown = TRUE)
+Depends:
+    R (>= 4.1)
+Imports:
+    clue,
+    Rcpp,
+    stats,
+    utils
+LinkingTo:
+    Rcpp
+Suggests:
+    knitr,
+    pkgdown,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Collate:
+    'CGLBM-package.R'
+    'RcppExports.R'
+    'cglbm_core.R'
+    'completion_methods.R'
+    'cpp-kernels.R'
+    'model_selection.R'
+    'preprocessing.R'
+URL: https://stagill.github.io/CGLBM/, https://github.com/StaGill/CGLBM
+BugReports: https://github.com/StaGill/CGLBM/issues
+Config/roxygen2/version: 8.1.0

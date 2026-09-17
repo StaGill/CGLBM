@@ -1,0 +1,71 @@
+url: https://stagill.github.io/CGLBM/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly
+  bslib:
+    primary: "#3d405b"
+    base_font: {google: "Source Sans Pro"}
+    heading_font: {google: "Source Sans Pro"}
+    code_font: {google: "JetBrains Mono"}
+
+navbar:
+  structure:
+    left:  [intro, reference, articles, news]
+    right: [search, github]
+
+home:
+  sidebar:
+    structure: [links, articles, license, citation, authors]
+    components:
+      articles:
+        title: Articles
+        text: |
+          - [Get started](articles/getting-started.html)
+          - [Model selection](articles/model-selection.html)
+          - [Reporting design and information](articles/reporting-design.html)
+
+reference:
+  - title: Reported data
+    contents:
+      - new_cglbm_data
+      - apply_detection_limits
+      - exact_cglbm_data
+      - print.cglbm_data
+
+  - title: Fitting and summaries
+    contents:
+      - censored_lbm
+      - print.cglbm_fit
+      - predict.cglbm_fit
+      - summary.cglbm_fit
+
+  - title: Model selection
+    contents:
+      - select_cglbm_model
+      - cglbm_icl_bic
+      - print.cglbm_model_selection
+
+  - title: Completion comparators
+    contents:
+      - complete_boundary
+      - complete_halfdouble
+      - complete_truncnorm
+      - complete_mi
+      - pool_mi_fits
+
+  - title: Evaluation and preprocessing
+    contents:
+      - comparison_cari
+      - center_cglbm_data
+
+articles:
+  - title: Get started
+    navbar: ~
+    contents:
+      - getting-started
+  - title: Statistical workflows
+    navbar: ~
+    contents:
+      - model-selection
+      - reporting-design
